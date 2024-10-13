@@ -2,30 +2,29 @@
 using ScreenSound.Modelos;
 using ScreenSound.Banco;
 
-try 
+//var context = new ScreenSoundContext();
+//var artistaDAL = new ArtistaDAL(context);
+
+try
 {
+    var context = new ScreenSoundContext();
+    var musicaDAL = new MusicaDAL(context);
+    Musica musica = new("fields of gold") { Id = 2};
+    //musicaDAL.Atualizar(musica);
+    musicaDAL.Deletar(musica);
+    var listaDeMusicas = musicaDAL.Listar();
 
-    var connection = new Connection();
-    var listaArtista = connection.Listar();
-
-    foreach (var artista in listaArtista)
+    foreach (var item in listaDeMusicas)
     {
-        Console.WriteLine(artista); 
+        Console.WriteLine(item);
     }
 
 }
-catch(Exception ex)
+catch(Exception e)
 {
-    Console.WriteLine(ex.Message);
+    Console.WriteLine(e.Message);
 }
 return;
-
-Artista ira = new Artista("Ira!", "Banda Ira!");
-Artista beatles = new("The Beatles", "Banda The Beatles");
-
-Dictionary<string, Artista> artistasRegistrados = new();
-artistasRegistrados.Add(ira.Nome, ira);
-artistasRegistrados.Add(beatles.Nome, beatles);
 
 Dictionary<int, Menu> opcoes = new();
 opcoes.Add(1, new MenuRegistrarArtista());
@@ -64,7 +63,7 @@ void ExibirOpcoesDoMenu()
     if (opcoes.ContainsKey(opcaoEscolhidaNumerica))
     {
         Menu menuASerExibido = opcoes[opcaoEscolhidaNumerica];
-        menuASerExibido.Executar(artistasRegistrados);
+        //menuASerExibido.Executar(artistaDAL);
         if (opcaoEscolhidaNumerica > 0) ExibirOpcoesDoMenu();
     } 
     else
