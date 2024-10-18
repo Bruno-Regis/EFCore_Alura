@@ -2,29 +2,8 @@
 using ScreenSound.Modelos;
 using ScreenSound.Banco;
 
-//var context = new ScreenSoundContext();
-//var artistaDAL = new ArtistaDAL(context);
-
-try
-{
-    var context = new ScreenSoundContext();
-    var musicaDAL = new MusicaDAL(context);
-    Musica musica = new("fields of gold") { Id = 2};
-    //musicaDAL.Atualizar(musica);
-    musicaDAL.Deletar(musica);
-    var listaDeMusicas = musicaDAL.Listar();
-
-    foreach (var item in listaDeMusicas)
-    {
-        Console.WriteLine(item);
-    }
-
-}
-catch(Exception e)
-{
-    Console.WriteLine(e.Message);
-}
-return;
+var context = new ScreenSoundContext();
+var artistaDAL = new DAL<Artista>(context);
 
 Dictionary<int, Menu> opcoes = new();
 opcoes.Add(1, new MenuRegistrarArtista());
